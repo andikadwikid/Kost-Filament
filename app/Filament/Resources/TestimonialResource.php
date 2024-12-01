@@ -2,24 +2,25 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CityResource\Pages;
-use App\Filament\Resources\CityResource\RelationManagers;
-use App\Models\City;
+use App\Filament\Resources\TestimonialResource\Pages;
+use App\Filament\Resources\TestimonialResource\RelationManagers;
+use App\Models\Testimonial;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CityResource extends Resource
+class TestimonialResource extends Resource
 {
-    protected static ?string $model = City::class;
+    protected static ?string $model = Testimonial::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -27,20 +28,25 @@ class CityResource extends Resource
     {
         return $form
             ->schema([
-                FileUpload::make('image')
-                    ->required()
+                FileUpload::make('photo')
                     ->image()
-                    ->directory('cities')
+                    ->directory('testimonials')
+                    ->required()
+                    ->columnSpan(2),
+                Select::make('boarding_house_id')
+                    ->relationship('boardingHouse', 'name')
+                    ->required()
+                    ->columnSpan(2),
+                Textarea::make('content')
+                    ->required()
                     ->columnSpan(2),
                 TextInput::make('name')
-                    ->required()
-                    ->reactive()
-                    ->afterStateUpdated(function ($state, callable $set) {
-                        $set('slug', str($state)->slug());
-                    }),
-                TextInput::make('slug')
-                    ->required()
-                    ->readOnly()
+                    ->required(),
+                TextInput::make('rating')
+                    ->numeric()
+                    ->minValue(1)
+                    ->maxValue(5)
+                    ->required(),
             ]);
     }
 
@@ -48,9 +54,11 @@ class CityResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('image'),
+                TextColumn::make('photo'),
+                TextColumn::make('boardingHouse.name'),
                 TextColumn::make('name'),
-                TextColumn::make('slug')
+                TextColumn::make('content'),
+                TextColumn::make('rating'),
             ])
             ->filters([
                 //
@@ -77,9 +85,9 @@ class CityResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCities::route('/'),
-            'create' => Pages\CreateCity::route('/create'),
-            'edit' => Pages\EditCity::route('/{record}/edit'),
+            'index' => Pages\ListTestimonials::route('/'),
+            'create' => Pages\CreateTestimonial::route('/create'),
+            'edit' => Pages\EditTestimonial::route('/{record}/edit'),
         ];
     }
 }

@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Room extends Model
 {
+    use SoftDeletes;
+
     protected $guarded = [];
 
     public function boardingHouse()
@@ -15,7 +18,7 @@ class Room extends Model
 
     public function images()
     {
-        return $this->belongsTo(RoomImage::class);
+        return $this->hasMany(RoomImage::class);
     }
 
     public function transactions()

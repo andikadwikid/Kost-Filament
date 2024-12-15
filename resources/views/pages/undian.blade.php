@@ -12,9 +12,12 @@
     <div class="flex items-center justify-center bg-red-500 h-screen">
         <div class="max-w-3xl w-full rounded overflow-hidden shadow-lg bg-white p-5">
             <div class="flex flex-col items-center justify-center">
+                <div class="mb-5 text-5xl">
+                    <h3>Judul Prize</h3>
+                </div>
                 <div id="slot"
                     class="text-4xl font-bold border p-4 w-full text-center overflow-hidden text-ellipsis whitespace-nowrap">
-                    ---
+                    ???
                 </div>
                 <div id="result" class="text-xl mt-4 font-semibold w-full break-words text-center">
                     Press
@@ -180,6 +183,7 @@
                 e = !1
             }
         }();
+
         // custom js
         // confetti.start();
 

@@ -17,13 +17,13 @@ class BoardingHouseRepository implements BoardingHouseRepositoryInterface
         if ($city)
             $query->whereHas(
                 'city',
-                fn($query) => $query->where('city', $city)
+                fn($query) => $query->where('slug', $city)
             );
 
         if ($category)
             $query->whereHas(
                 'category',
-                fn($query) => $query->where('category', $category)
+                fn($query) => $query->where('slug', $category)
             );
 
         return $query->get();

@@ -188,24 +188,24 @@
         // confetti.start();
 
         // List nama-nama yang akan diundi
-        // const items = [
-        //     "Alice",
-        //     "Bob",
-        //     "Charlie",
-        //     "Diana",
-        //     "Evelyn",
-        //     "Frank",
-        //     "Grace",
-        //     "Hannah",
-        //     "Ivy",
-        // ];
+        const items = [
+            "Alice",
+            "Bob",
+            "Charlie",
+            "Diana",
+            "Evelyn",
+            "Frank",
+            "Grace",
+            "Hannah",
+            "Ivy",
+        ];
 
-        const items = [];
-        const totalItems = 10000; // Jumlah angka yang ingin dibuat
+        // const items = [];
+        // const totalItems = 10000; // Jumlah angka yang ingin dibuat
 
-        for (let i = 1; i <= totalItems; i++) {
-            items.push(i.toString().padStart(5, '0')); // Menggunakan padStart untuk menambahkan 0 di depan
-        }
+        // for (let i = 1; i <= totalItems; i++) {
+        //     items.push(i.toString().padStart(5, '0')); // Menggunakan padStart untuk menambahkan 0 di depan
+        // }
 
         const spinButton = document.getElementById("spinButton");
         const stopButton = document.getElementById("stopButton");
